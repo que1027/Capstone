@@ -88,30 +88,30 @@ function afterRender(currentState) {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             }
-        });
-        let event;
-        axios
-                //Make a POST request to the API to pull all appointment
-                .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
-                .then(response => {
-                    const responseData = response.data;
-                    for(i=0;i<responseData.length;i++){
-                      console.log(responseData[i].appName);
+       });
+    //     let event;
+    //     axios
+    //             //Make a POST request to the API to pull all appointment
+    //             .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
+    //             .then(response => {
+    //                 const responseData = response.data;
+    //                 for(i=0;i<responseData.length;i++){
+    //                   console.log(responseData[i].appName);
 
-                    //   console.log(responseData[i])
-                      event = {
-                        title: responseData[i].appName,
-                        start: responseData[i].appDate,
-                        description: responseData[i].appLength
-                    };
-                    console.log(event)
-                    calendar.render();
-                      calendar.addEvent(event);
+    //                 //   console.log(responseData[i])
+    //                   event = {
+    //                     title: responseData[i].appName,
+    //                     start: responseData[i].appDate,
+    //                     description: responseData[i].appLength
+    //                 };
+    //                 console.log(event)
+    //                 calendar.render();
+    //                   calendar.addEvent(event);
 
-                    }
+    //                 }
 
 
-    })
+    // })
         document.getElementById("addEvent").addEventListener("click", event => {
             document.getElementById("hidden--mobile").style = "position:relative; top:-49vw;"
             document.getElementById("flow").style = "display:block;"
@@ -140,7 +140,9 @@ function afterRender(currentState) {
                 //Make a POST request to the API to schedule an appointment
                 .post(`${process.env.APPOINTMENT_API_URL}/appointments`, requestData)
                 .then(response => {
-                    alert(response);
+                    //alert(response);
+                    store.meetMe.appointments.push(response.data);
+                    calendar.addEvent(response.data);
                 })
                 //log errors
                 .catch(error => {
@@ -209,6 +211,10 @@ router.hooks({
                 console.log("It puked", error);
                 done();
             });
+            break;
+            case "meetMe":
+
+            done();
             break;
             default:
               done();
