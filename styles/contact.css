@@ -1,0 +1,20 @@
+
+
+
+    #home{
+        color:white;
+        background-color:green; 
+        border-radius: 16px;
+        font-size: 1.3vw;
+    }
+    #socials{
+        position:absolute;
+        left:88vw; 
+    }
+    .whiteButton{
+        background-color:white;
+    }
+    .greenButton{
+        color:white;
+        background-color:green; 
+    }

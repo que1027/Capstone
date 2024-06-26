@@ -1,0 +1,48 @@
+body{
+    background-color: black;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+#projects{
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+#list{
+    color:white;
+    overflow-y:scroll;
+    font-size: 5vw;
+    height:40vw;
+    width:35vw;
+}
+#language1:hover {
+    transform: translateY(-8px);
+}
+#language2:hover {
+    transform: translateY(-8px);
+}
+#language3:hover {
+    transform: translateY(-8px);
+}
+#language4:hover {
+    transform: translateY(-8px);
+}
+#screen{
+    display: flex;
+align-self:center;
+}
+button{
+    border-radius: 16px;
+    font-size: 2vw;
+}
+#socials{
+    position:absolute;
+    left:88vw; 
+}
+.whiteButton{
+    background-color:white;
+  }
+  .greenButton{
+    color:white;
+    background-color:green; 
+  }
