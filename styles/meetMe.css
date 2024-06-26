@@ -1,0 +1,16 @@
+body{
+    background-color: black;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+#socials{
+    position:absolute;
+    left:88vw; 
+}
+.whiteButton{
+    background-color:white;
+}
+.greenButton{
+    color:white;
+    background-color:green; 
+}

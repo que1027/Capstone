@@ -1,0 +1,18 @@
+body{
+    background-color: white;
+}
+p{
+    color:white;
+    margin:10%;
+}
+#AboutMe{
+    margin-left: 43%;
+    margin-top: 10%;
+    color:white;
+}
+#home{
+    color:white;
+    background-color:green; 
+    border-radius: 16px;
+    font-size: 1.3vw;
+}

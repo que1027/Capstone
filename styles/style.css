@@ -1,0 +1,337 @@
+/*Stuff that don't change*/
+body{
+    background-color: black;
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+}
+#root{
+    display:flex;
+    flex-direction: column;
+}
+footer{
+    position:absolute;
+    display: flex;
+    top:60vw;
+    
+}
+#socials{
+display: flex;
+justify-content:space-between;
+position: relative;
+left:750px;
+}
+    /*Navigation*/
+
+        button{
+            border-radius: 16px;
+            font-size: 2vw;
+        }
+        .hidden--mobile{
+            display: flex;
+            position: relative;
+            top:-1vw; 
+        }
+        .whiteButton{
+            background-color:white;
+            
+        }
+        .greenButton{
+            background-color:green; 
+        }
+        #hbMenu{
+        display: none;
+        }
+        #menu{
+            display:flex;
+            flex-direction: row;
+        }
+/*Home*/
+    /*name and pic*/
+    #headshot{
+        display:flex;
+        padding-left: 20vw;
+        height:40vw;
+        width:40vw;
+        margin:auto;
+    }
+    #namesAndPic{
+
+        display:flex;
+        flex-direction: row;
+
+    }
+    #names{
+        display:flex;
+        flex-direction: column;
+    }
+
+    #name{
+        color:white;
+        font-size:6vw;
+    }
+    #lname{
+        color:green;
+        font-size:6vw;
+    }
+
+/*Contact Me*/
+    #Email{
+        margin-left:35%;
+        margin-top: 10%;
+    }
+    #ESubject{
+        width:40%;
+        border-radius: 16px;
+    }
+    #EBody{
+            width: 41%;
+            height: 20vw;
+            border-radius: 16px; 
+    }
+    #ESubmit{
+            width:41%;
+            border-radius: 16px;
+            background-color:green; 
+        }
+    form{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+    }
+/*About Me*/
+p{
+    color:white;
+    margin:10%;
+}
+    #AboutMe{
+        display:flex;
+        margin-left: 43%;
+        margin-top: 10%;
+        color:white;
+        flex-direction:column-reverse;
+        font-size: medium;
+    
+    }
+    p{
+        margin:10px;
+    }
+/*My Awards*/
+
+    #certificates-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:30px
+    }
+    .cert{
+    width:300px;
+    }
+    .cert:hover{
+        width:310px;
+        }
+/*MyProjects*/
+    /*list*/
+    #projects{
+        display: flex;
+        justify-content: center;
+        justify-content: space-between;
+    }
+    #list{
+        color:white;
+        overflow-y:scroll;
+        font-size: 5vw;
+        height:40vw;
+        width:35vw;
+    }
+   
+    /*Movement On Hover*/
+    #language1:hover {
+        transform: translateY(-8px);
+    }
+    #language2:hover {
+        transform: translateY(-8px);
+    }
+    #language3:hover {
+        transform: translateY(-8px);
+    }
+    #language4:hover {
+        transform: translateY(-8px);
+    }
+    /*Screen and animation*/
+    #screen{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+   
+    align-self:center;
+    }
+
+    #static{
+
+    }
+    
+/*Meet Me*/
+#addEvent{
+   background-color: darkgray;
+    width:100px;
+}
+    /*Calandar*/
+    #table{
+        display:flex; 
+        justify-content: center;
+    color:white; 
+    }
+    
+#calendar{
+        color:white;
+        height:90vh;
+        width:99vw;
+        z-index: 1;
+}
+#sched{
+position: relative;
+top:-650px;
+left:300px;
+display:flex;
+justify-content: center;
+z-index: 2;
+
+}
+#schedForm{
+    position: relative;
+    top:-350px;
+    z-index: 3;
+    }
+#flow{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    #appName{
+        width:41%;
+        border-radius: 16px;
+    
+    }
+    #appDate{
+        width:41%;
+        border-radius: 16px;
+    }
+    #appTime{
+        width:41%;
+        border-radius: 16px;
+    }
+    #appSubmit{
+        width:41%;
+        border-radius: 16px;
+        background-color: green;
+    }
+
+#slide{
+
+    display:none;
+ 
+}
+
+
+
+
+
+
+
+/* phone view */
+@media (max-width:667px) {
+    body{
+        background-color: black;
+        /* overflow-y: hidden;
+        overflow-x: hidden; */
+    }
+    #namesAndPic{
+        display:flex;
+        flex-direction: column;
+    }
+    #names{
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        left:-12vw;
+    }
+    #name{
+        color:white;
+        font-size:8vw;
+    }
+    #lname{
+        color:green;
+        font-size:8vw;
+    }
+    #list{
+        color:white;
+        overflow-y:scroll;
+        font-size: 5vw;
+        height:40vw;
+        width:35vw;
+    }
+    #headshot{
+        display:flex;
+        position: relative;
+        left:-30vw;
+        height:120vw;
+        width:110vw;
+    }
+    
+    /* button{
+        border-radius: 16px;
+        font-size: 2vw;
+    }
+    .whiteButton{
+        background-color:white;
+    }
+    .greenButton{
+        color:white;
+        background-color:green; 
+    } */
+    #menu{
+        display: inline;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #hbMenu{
+        display:inline;
+        width:50px;
+        height:50px;
+        color: green;
+    }
+    
+    footer{
+        position:absolute;
+        display: flex;
+        left:-40px;
+        top:148vw;
+        
+    }
+    /* #buttons{
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        width:100px;
+        top:60px;
+        left:17vw;
+        justify-content: space-between;
+        z-index: 1;
+    }  */
+    #slide{
+        position:absolute;
+        /* top:-2vw;
+         */
+         left:-5vw;
+        display:none;
+        z-index: 2;
+    }
+    .hidden--mobile{
+        display: none;
+        flex-direction: column;
+        z-index: 3;
+    }
+}
+
