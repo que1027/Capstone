@@ -98,7 +98,7 @@ function afterRender(currentState) {
                 .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
                 .then(response => {
                     const responseData = response.data;
-                    for(i=0;i<responseData.length;i++){
+                    for(let i=0;i<responseData.length;i++){
                       console.log(responseData[i].appName);
 
                     //   console.log(responseData[i])
