@@ -11,7 +11,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { preventDefault } from "@fullcalendar/core/internal";
-export { default as subject }
+
 
 const router = new Navigo("/");
 
@@ -54,6 +54,7 @@ function afterRender(currentState) {
 
     //listen for the contact me page to open then listen for a email to be sent
     if (currentState.view === "contactMe") {
+      console.log("I work")
         document.getElementById("eForm").addEventListener("submit", event => {
             event.preventDefault();
             const subject = document.getElementById("eSubject").value;
@@ -79,6 +80,7 @@ function afterRender(currentState) {
 
         });
     } else if (currentState.view === "meetMe") {
+      console.log("I work")
         let calendarEl = document.getElementById('calendar');
         let calendar = new Calendar(calendarEl, {
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
@@ -88,30 +90,31 @@ function afterRender(currentState) {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             }
-       });
-    //     let event;
-    //     axios
-    //             //Make a POST request to the API to pull all appointment
-    //             .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
-    //             .then(response => {
-    //                 const responseData = response.data;
-    //                 for(i=0;i<responseData.length;i++){
-    //                   console.log(responseData[i].appName);
+      });
+      calendar.render();
+        let event;
+        axios
+                //Make a POST request to the API to pull all appointment
+                .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
+                .then(response => {
+                    const responseData = response.data;
+                    for(i=0;i<responseData.length;i++){
+                      console.log(responseData[i].appName);
 
-    //                 //   console.log(responseData[i])
-    //                   event = {
-    //                     title: responseData[i].appName,
-    //                     start: responseData[i].appDate,
-    //                     description: responseData[i].appLength
-    //                 };
-    //                 console.log(event)
-    //                 calendar.render();
-    //                   calendar.addEvent(event);
+                    //   console.log(responseData[i])
+                      event = {
+                        title: responseData[i].appName,
+                        start: responseData[i].appDate,
+                        description: responseData[i].appLength
+                    };
+                    console.log(event)
+                    calendar.render();
+                      calendar.addEvent(event);
 
-    //                 }
+                    }
 
 
-    // })
+    })
         document.getElementById("addEvent").addEventListener("click", event => {
             document.getElementById("hidden--mobile").style = "position:relative; top:-49vw;"
             document.getElementById("flow").style = "display:block;"
@@ -148,7 +151,7 @@ function afterRender(currentState) {
                 .catch(error => {
                     console.log("you've met with a terrible fate haven't you?", error);
                 });
-                router.navigate("/contactMe");
+                // router.navigate("/contactMe");
                 router.navigate("/meetMe");
         });
     } else if (currentState.view == "home") {
@@ -213,8 +216,33 @@ router.hooks({
             });
             break;
             case "meetMe":
+              let event;
+              axios
+                      //Make a POST request to the API to pull all appointment
+                      .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
+                      .then(response => {
+                          const responseData = response.data;
+                          for(i=0;i<responseData.length;i++){
+                            console.log(responseData[i].appName);
 
+                          //   console.log(responseData[i])
+                            event = {
+                              title: responseData[i].appName,
+                              start: responseData[i].appDate,
+                              description: responseData[i].appLength
+                          };
+
+                          console.log(event)
+                          // calendar.render();
+                          //   calendar.addEvent(event);
+
+                          }
+                          done();
+
+          })  .catch(error =>{
+            console.log("It puked", error);
             done();
+        });
             break;
             default:
               done();
@@ -236,6 +264,7 @@ router.on({
         //change the :view data element to camel case and remove any dashes(support for multi-woord views)
         const view = data?.view ? camelCase(data.view) : "home"; //help me better understand this line
         if (view in store) {
+          console.log(view);
             render(store[view]);
         } else {
             render(store.viewNotFound);
