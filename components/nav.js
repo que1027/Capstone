@@ -8,12 +8,12 @@ import navItem from "./navItem.js";
 //  - data-navigo is a switch that allows Navigo to handle our page routing
 
 export default navItems => {
-    return html`
+  return html`
     <nav>
-        <i class="nav-bars"></i>
-        <ul id="hidden--mobile" class="hidden--mobile">
-            ${navItems.map(item => navItem(item)).join("")}
-</ul>
-</nav>
-    `;
-}
+      <i class="nav-bars"></i>
+      <ul id="hidden--mobile" class="hidden--mobile">
+        ${navItems.map(item => navItem(item)).join("")}
+      </ul>
+    </nav>
+  `;
+};
