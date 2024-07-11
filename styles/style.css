@@ -1,8 +1,8 @@
 /*Stuff that don't change*/
 body{
     background-color: black;
-    /* overflow-y: hidden;
-    overflow-x: hidden; */
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 #root{
     display:flex;
@@ -29,7 +29,7 @@ left:750px;
         .hidden--mobile{
             display: flex;
             position: relative;
-            top:-1vw;
+            top:-10vw;
         }
         .whiteButton{
             background-color:white;
@@ -50,7 +50,7 @@ left:750px;
     #headshot{
         display:flex;
         padding-left: 20vw;
-        height:40vw;
+        height:45vw;
         width:40vw;
         margin:auto;
     }
