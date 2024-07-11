@@ -18,6 +18,7 @@ const router = new Navigo("/");
 
 //render header main nav and footer of default view(home)
 function render(currentState = store.home) {
+    //render data on the specefied view
     document.querySelector("#root").innerHTML = `
     ${header(currentState)}
     ${main(currentState)}
@@ -41,7 +42,7 @@ function afterRender(currentState) {
 
     //hb Menu open
     document.getElementById("hbMenu").addEventListener("click", event => {
-
+    //if the hb menu is not already open open it else close it
         if (document.getElementById("slide").style.display !== "block") {
             document.getElementById("slide").style = "display: block"
             document.getElementById("hidden--mobile").style = "display: flex;"
@@ -54,17 +55,16 @@ function afterRender(currentState) {
 
     //listen for the contact me page to open then listen for a email to be sent
     if (currentState.view === "contactMe") {
-        //console.log("I work")
         document.getElementById("eForm").addEventListener("submit", event => {
             event.preventDefault();
             const subject = document.getElementById("eSubject").value;
             const body = document.getElementById("eBody").value;
+            //object holds data to be sent
             const requestBody = {
                 subject: subject,
                 body: body
             }
-            //console.log("requestBody:", requestBody);
-
+            //axios call to get mailjet server
             axios
                 .get(
                     `${process.env.MAIL_API_URL}/mail`
@@ -79,8 +79,9 @@ function afterRender(currentState) {
 
 
         });
+        //listen for the meetMe page to open
     } else if (currentState.view === "meetMe") {
-        //console.log("I work")
+        //create a calendar
         let calendarEl = document.getElementById('calendar');
         let calendar = new Calendar(calendarEl, {
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
@@ -91,10 +92,11 @@ function afterRender(currentState) {
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             }
         });
+        //render calendar
         calendar.render();
         let event;
+        //axios call to get all appointments
         axios
-            //Make a POST request to the API to pull all appointment
             .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
             .then(response => {
                 const responseData = response.data;
@@ -107,7 +109,7 @@ function afterRender(currentState) {
                         start: responseData[i].appDate,
                         description: responseData[i].appLength
                     };
-                    //console.log(event)
+                    //render the events on the calendar
                     calendar.render();
                     calendar.addEvent(event);
 
@@ -115,17 +117,18 @@ function afterRender(currentState) {
 
 
             })
+            //listen for if the add event button is clicked
         document.getElementById("addEvent").addEventListener("click", event => {
             document.getElementById("hidden--mobile").style = "position:relative; top:-49vw;"
             document.getElementById("flow").style = "display:block;"
 
         });
+        //listen for an event to be added
         document.getElementById("schedForm").addEventListener("submit", event => {
             event.preventDefault();
 
             //Get the form element
             const inputs = event.target.elements;
-            //console.log("Inputs: ", inputs);
 
             //create a request body
             const requestData = {
@@ -136,26 +139,25 @@ function afterRender(currentState) {
                 //accepted: false
             };
 
-            //log the request
-            //console.log("Request Body:", requestData);
-
+            //axios call to add an appointment
             axios
-                //Make a POST request to the API to schedule an appointment
                 .post(`${process.env.APPOINTMENT_API_URL}/appointments`, requestData)
                 .then(response => {
-                    //alert(response);
                     store.meetMe.appointments.push(response.data);
                     calendar.addEvent(response.data);
                 })
                 //log errors
                 .catch(error => {
-                    //console.log("you've met with a terrible fate haven't you?", error);
                 });
-            // router.navigate("/contactMe");
+                //reload the page
             router.navigate("/meetMe");
         });
+        //listen for the home page to open
     } else if (currentState.view == "home") {
+        //start the encrypted name effect
+        //run the change function every 20ms
         let myInterval = setInterval(change, 20)
+        //split the name
         let fName = document.getElementById("name");
         let lName = document.getElementById("lname");
         const fNameSplit = fName.innerHTML.split("");
@@ -163,17 +165,19 @@ function afterRender(currentState) {
         const hbMenu = document.getElementById("hbMenu");
         const slide = document.getElementById("slide");
         const buttons = document.getElementById("buttons");
-
+        //loop through the name and change the letters
         let letters = 0;
         function change() {
             const fNameRand = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
             const name2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"];
 
+            //go to the letter of name that is at the random placement of fNameRand and change it to a random letter that is in name2
             fNameSplit[fNameRand[Math.floor(Math.random() * 7)]] = name2[Math.floor(Math.random() * 15)];
             lNameSplit[fNameRand[Math.floor(Math.random() * 6)]] = name2[Math.floor(Math.random() * 15)];
             fName.innerHTML = fNameSplit;
             lName.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + lNameSplit;
             letters++;
+            //after going through all 30 letters in my full name set fName and lName back to Quinton and Taylor
             if (letters == 30) {
                 clearInterval(myInterval);
                 fName.innerHTML = "Quinton";
@@ -184,10 +188,13 @@ function afterRender(currentState) {
 
     }
 }
+//set code to run at a time that is in relation to the rout change of the page
 router.hooks({
+    //run before the view is changed
     before: (done, params) => {
         // We need to know what view we are on to know what data to fetch
         const view =
+        //l
             params && params.data && params.data.view
                 ? camelCase(params.data.view)
                 : "home";
