@@ -12,7 +12,7 @@ footer{
     position:absolute;
     display: flex;
     top:60vw;
-    
+
 }
 #socials{
 display: flex;
@@ -29,14 +29,14 @@ left:750px;
         .hidden--mobile{
             display: flex;
             position: relative;
-            top:-1vw; 
+            top:-1vw;
         }
         .whiteButton{
             background-color:white;
-            
+
         }
         .greenButton{
-            background-color:green; 
+            background-color:green;
         }
         #hbMenu{
         display: none;
@@ -86,12 +86,12 @@ left:750px;
     #EBody{
             width: 41%;
             height: 20vw;
-            border-radius: 16px; 
+            border-radius: 16px;
     }
     #ESubmit{
             width:41%;
             border-radius: 16px;
-            background-color:green; 
+            background-color:green;
         }
     form{
             display:flex;
@@ -110,7 +110,7 @@ p{
         color:white;
         flex-direction:column-reverse;
         font-size: medium;
-    
+
     }
     p{
         margin:10px;
@@ -143,7 +143,7 @@ p{
         height:40vw;
         width:35vw;
     }
-   
+
     /*Movement On Hover*/
     #language1:hover {
         transform: translateY(-8px);
@@ -161,14 +161,14 @@ p{
     #screen{
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-   
+
     align-self:center;
     }
 
     #static{
 
     }
-    
+
 /*Meet Me*/
 #addEvent{
    background-color: darkgray;
@@ -176,11 +176,11 @@ p{
 }
     /*Calandar*/
     #table{
-        display:flex; 
+        display:flex;
         justify-content: center;
-    color:white; 
+    color:white;
     }
-    
+
 #calendar{
         color:white;
         height:90vh;
@@ -210,7 +210,7 @@ z-index: 2;
     #appName{
         width:41%;
         border-radius: 16px;
-    
+
     }
     #appDate{
         width:41%;
@@ -229,7 +229,7 @@ z-index: 2;
 #slide{
 
     display:none;
- 
+
 }
 
 
@@ -242,8 +242,8 @@ z-index: 2;
 @media (max-width:667px) {
     body{
         background-color: black;
-        /* overflow-y: hidden;
-        overflow-x: hidden; */
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
     #namesAndPic{
         display:flex;
@@ -278,7 +278,7 @@ z-index: 2;
         height:120vw;
         width:110vw;
     }
-    
+
     /* button{
         border-radius: 16px;
         font-size: 2vw;
@@ -288,7 +288,7 @@ z-index: 2;
     }
     .greenButton{
         color:white;
-        background-color:green; 
+        background-color:green;
     } */
     #menu{
         display: inline;
@@ -302,13 +302,13 @@ z-index: 2;
         height:50px;
         color: green;
     }
-    
+
     footer{
         position:absolute;
         display: flex;
         left:-40px;
         top:148vw;
-        
+
     }
     /* #buttons{
         display: none;
