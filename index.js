@@ -18,6 +18,7 @@ const router = new Navigo("/");
 
 //render header main nav and footer of default view(home)
 function render(currentState = store.home) {
+    //render data on the specefied view
     document.querySelector("#root").innerHTML = `
     ${header(currentState)}
     ${main(currentState)}
@@ -41,7 +42,7 @@ function afterRender(currentState) {
 
     //hb Menu open
     document.getElementById("hbMenu").addEventListener("click", event => {
-
+    //if the hb menu is not already open open it else close it
         if (document.getElementById("slide").style.display !== "block") {
             document.getElementById("slide").style = "display: block"
             document.getElementById("hidden--mobile").style = "display: flex;"
@@ -54,33 +55,33 @@ function afterRender(currentState) {
 
     //listen for the contact me page to open then listen for a email to be sent
     if (currentState.view === "contactMe") {
-      console.log("I work")
         document.getElementById("eForm").addEventListener("submit", event => {
             event.preventDefault();
             const subject = document.getElementById("eSubject").value;
             const body = document.getElementById("eBody").value;
+            //object holds data to be sent
             const requestBody = {
                 subject: subject,
                 body: body
             }
-            console.log("requestBody:", requestBody);
-
+            //axios call to get mailjet server
             axios
-            .get(
-                `${process.env.MAIL_API_URL}/mail`
-            )
-            .then( response =>{
-                console.log("mail data: ", response.data);
+                .get(
+                    `${process.env.MAIL_API_URL}/mail`
+                )
+                .then(response => {
+                    //console.log("mail data: ", response.data);
 
-            }).catch(err=> {
-                console.log("it puked", err);
-            })
+                }).catch(err => {
+                    //console.log("it puked", err);
+                })
 
 
 
         });
+        //listen for the meetMe page to open
     } else if (currentState.view === "meetMe") {
-      console.log("I work")
+        //create a calendar
         let calendarEl = document.getElementById('calendar');
         let calendar = new Calendar(calendarEl, {
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
@@ -90,42 +91,44 @@ function afterRender(currentState) {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             }
-      });
-      calendar.render();
+        });
+        //render calendar
+        calendar.render();
         let event;
+        //axios call to get all appointments
         axios
-                //Make a POST request to the API to pull all appointment
-                .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
-                .then(response => {
-                    const responseData = response.data;
-                    for(let i=0;i<responseData.length;i++){
-                      console.log(responseData[i].appName);
+            .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
+            .then(response => {
+                const responseData = response.data;
+                for (let i = 0; i < responseData.length; i++) {
+                    //console.log(responseData[i].appName);
 
                     //   console.log(responseData[i])
-                      event = {
+                    event = {
                         title: responseData[i].appName,
                         start: responseData[i].appDate,
                         description: responseData[i].appLength
                     };
-                    console.log(event)
+                    //render the events on the calendar
                     calendar.render();
-                      calendar.addEvent(event);
+                    calendar.addEvent(event);
 
-                    }
+                }
 
 
-    })
+            })
+            //listen for if the add event button is clicked
         document.getElementById("addEvent").addEventListener("click", event => {
             document.getElementById("hidden--mobile").style = "position:relative; top:-49vw;"
             document.getElementById("flow").style = "display:block;"
 
         });
+        //listen for an event to be added
         document.getElementById("schedForm").addEventListener("submit", event => {
             event.preventDefault();
 
             //Get the form element
             const inputs = event.target.elements;
-            console.log("Inputs: ", inputs);
 
             //create a request body
             const requestData = {
@@ -136,26 +139,25 @@ function afterRender(currentState) {
                 //accepted: false
             };
 
-            //log the request
-            console.log("Request Body:", requestData);
-
+            //axios call to add an appointment
             axios
-                //Make a POST request to the API to schedule an appointment
                 .post(`${process.env.APPOINTMENT_API_URL}/appointments`, requestData)
                 .then(response => {
-                    //alert(response);
                     store.meetMe.appointments.push(response.data);
                     calendar.addEvent(response.data);
                 })
                 //log errors
                 .catch(error => {
-                    console.log("you've met with a terrible fate haven't you?", error);
                 });
-                // router.navigate("/contactMe");
-                router.navigate("/meetMe");
+                //reload the page
+            router.navigate("/meetMe");
         });
+        //listen for the home page to open
     } else if (currentState.view == "home") {
+        //start the encrypted name effect
+        //run the change function every 20ms
         let myInterval = setInterval(change, 20)
+        //split the name
         let fName = document.getElementById("name");
         let lName = document.getElementById("lname");
         const fNameSplit = fName.innerHTML.split("");
@@ -163,17 +165,19 @@ function afterRender(currentState) {
         const hbMenu = document.getElementById("hbMenu");
         const slide = document.getElementById("slide");
         const buttons = document.getElementById("buttons");
-
+        //loop through the name and change the letters
         let letters = 0;
         function change() {
             const fNameRand = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
             const name2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"];
 
+            //go to the letter of name that is at the random placement of fNameRand and change it to a random letter that is in name2
             fNameSplit[fNameRand[Math.floor(Math.random() * 7)]] = name2[Math.floor(Math.random() * 15)];
             lNameSplit[fNameRand[Math.floor(Math.random() * 6)]] = name2[Math.floor(Math.random() * 15)];
             fName.innerHTML = fNameSplit;
             lName.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + lNameSplit;
             letters++;
+            //after going through all 30 letters in my full name set fName and lName back to Quinton and Taylor
             if (letters == 30) {
                 clearInterval(myInterval);
                 fName.innerHTML = "Quinton";
@@ -184,91 +188,94 @@ function afterRender(currentState) {
 
     }
 }
+//set code to run at a time that is in relation to the rout change of the page
 router.hooks({
+    //run before the view is changed
     before: (done, params) => {
         // We need to know what view we are on to know what data to fetch
         const view =
-          params && params.data && params.data.view
-            ? camelCase(params.data.view)
-            : "home";
+        //l
+            params && params.data && params.data.view
+                ? camelCase(params.data.view)
+                : "home";
         // Add a switch case statement to handle multiple routes
         switch (view) {
-          // Add a case for each view that needs data from an API
-          // New Case for the home View
-          case "about":
-            axios
-            //Get request to retieve the current weather using the open weather map API
-            .get(
-                `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial&q=st%20louis`
-            )
-            .then(response =>{
-                console.log("Weather Data:", response.data)
-                //create an object to be stored in the Home state from response
-                store.about.weather = {
-                    city: response.data.name,
-                    temp: response.data.main.temp
-                };
-                done();
-            })
-            .catch(error =>{
-                console.log("It puked", error);
-                done();
-            });
-            break;
+            // Add a case for each view that needs data from an API
+            // New Case for the home View
+            case "weather":
+                axios
+                    //Get request to retieve the current weather using the open weather map API
+                    .get(
+                        `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=imperial&q=st%20louis`
+                    )
+                    .then(response => {
+                        //console.log("Weather Data:", response.data)
+                        //create an object to be stored in the Home state from response
+                        store.weather.weather = {
+                            city: response.data.name,
+                            temp: response.data.main.temp
+                        };
+                        done();
+                    })
+                    .catch(error => {
+                        //console.log("It puked", error);
+                        done();
+                    });
+                break;
             case "meetMe":
-              let event;
-              axios
-                      //Make a POST request to the API to pull all appointment
-                      .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
-                      .then(response => {
-                          const responseData = response.data;
-                          for(i=0;i<responseData.length;i++){
-                            console.log(responseData[i].appName);
+                let event;
+                axios
+                    //Make a POST request to the API to pull all appointment
+                    .get(`${process.env.APPOINTMENT_API_URL}/appointments`)
+                    .then(response => {
+                        const responseData = response.data;
+                        for (i = 0; i < responseData.length; i++) {
+                            //console.log(responseData[i].appName);
 
-                          //   console.log(responseData[i])
+                            //   console.log(responseData[i])
                             event = {
-                              title: responseData[i].appName,
-                              start: responseData[i].appDate,
-                              description: responseData[i].appLength
-                          };
+                                title: responseData[i].appName,
+                                start: responseData[i].appDate,
+                                description: responseData[i].appLength
+                            };
 
-                          console.log(event)
-                          // calendar.render();
-                          //   calendar.addEvent(event);
+                            //console.log(event)
+                            // calendar.render();
+                            //   calendar.addEvent(event);
 
-                          }
-                          done();
+                        }
+                        done();
 
-          })  .catch(error =>{
-            console.log("It puked", error);
-            done();
-        });
-            break;
+                    }).catch(error => {
+                        //console.log("It puked", error);
+                        done();
+                    });
+                break;
             default:
-              done();
-          }
-        },
-        already: params => {
-          const view =
-            params && params.data && params.data.view
-              ? camelCase(params.data.view)
-              : "home";
-
-          render(store[view]);
+                done();
         }
-      });
+    },
+    already: params => {
+        const view =
+            params && params.data && params.data.view
+                ? camelCase(params.data.view)
+                : "home";
+
+        render(store[view]);
+    }
+});
 //render home as default and listen for view changes and move accordingly
 router.on({
     "/": () => render(store.home),
     ":view": ({ data, params }) => {
-        //change the :view data element to camel case and remove any dashes(support for multi-woord views)
-        const view = data?.view ? camelCase(data.view) : "home"; //help me better understand this line
+        //change the :view data element to camel case and remove any dashes(support for multi-word views)
+        const view = data?.view ? camelCase(data.view) : "home";
         if (view in store) {
-          console.log(view);
+            //console.log(view);
             render(store[view]);
         } else {
             render(store.viewNotFound);
-            console.log(`View ${view} not defined`);
+            //console.log(`View ${view} not defined`);
         }
     }
 

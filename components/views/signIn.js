@@ -1,16 +1,16 @@
 import html from "html-literal";
 
 export default () => html`
-  <form id="eForm" method="POST">
+  <form id="signInForm" method="POST">
     <label>
-      Your email:
+      Username
     </label>
-    <input id="eSubject" />
+    <input id="uName" />
 
     <label>
-      Your message:
+      Password
     </label>
-    <textarea id="eBody" name="message"></textarea>
+    <input id="pass" />
     <label>
       &nbsp;
     </label>

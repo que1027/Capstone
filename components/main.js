@@ -4,3 +4,4 @@ import * as views from "./views";
 export default state => html`
   ${views[state.view](state)}
 `;
+//console.log("views:", views);

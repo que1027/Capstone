@@ -1,4 +1,4 @@
 export default {
-    view: "meetMe",
-    appointments: []
-  };
+  view: "meetMe",
+  appointments: []
+};
