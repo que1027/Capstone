@@ -78,7 +78,11 @@ function afterRender(currentState) {
 
 
 
+
         });
+        //move nav to fit this page
+        let nav = document.getElementById("hidden--mobile");
+        nav.style = "top:10vw;";
         //listen for the meetMe page to open
     } else if (currentState.view === "meetMe") {
         //create a calendar
@@ -117,6 +121,9 @@ function afterRender(currentState) {
 
 
             })
+             //move nav to fit this page
+        let nav = document.getElementById("hidden--mobile");
+        nav.style = "top:1vw;";
             //listen for if the add event button is clicked
         document.getElementById("addEvent").addEventListener("click", event => {
             document.getElementById("hidden--mobile").style = "position:relative; top:-49vw;"
@@ -186,7 +193,21 @@ function afterRender(currentState) {
         }
 
 
-    }
+    }else if(currentState.view == "myAwards"){
+         //move nav to fit this page
+         let nav = document.getElementById("hidden--mobile");
+         nav.style = "top:5vw;";
+
+
+    }else if(currentState.view == "signIn"){
+        //move nav to fit this page
+        let nav = document.getElementById("hidden--mobile");
+        nav.style = "top:10vw;";
+   }else if(currentState.view == "weather"){
+    //move nav to fit this page
+    let nav = document.getElementById("hidden--mobile");
+    nav.style = "top:10vw;";
+}
 }
 //set code to run at a time that is in relation to the rout change of the page
 router.hooks({
