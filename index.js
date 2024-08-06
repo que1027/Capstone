@@ -31,27 +31,16 @@ function render(currentState = store.home) {
 
 //do things after the home page is rendered
 function afterRender(currentState) {
-    // add menu toggle to bars icon in nav bar
-    //does nothing and can be removed at any time
-    document.querySelector(".nav-bars").addEventListener("click", () => {
 
-        document.querySelector("nav > ul").classList.toggle("hidden--mobile");
+//toggle hamburger menu
 
+const menuButton = document.querySelector(".hamburger");
+const mobileMenu = document.querySelector(".hidden--mobile");
+menuButton.addEventListener("click", () => {
+    menuButton.classList.toggle("is-active");
+    mobileMenu.classList.toggle("is-active");
+});
 
-    });
-
-    //hb Menu open
-    document.getElementById("hbMenu").addEventListener("click", event => {
-    //if the hb menu is not already open open it else close it
-        if (document.getElementById("slide").style.display !== "block") {
-            document.getElementById("slide").style = "display: block"
-            document.getElementById("hidden--mobile").style = "display: flex;"
-
-        } else {
-            document.getElementById("slide").style = "display: none"
-            document.getElementById("hidden--mobile").style = "display: none;"
-        }
-    });
 
     //listen for the contact me page to open then listen for a email to be sent
     if (currentState.view === "contactMe") {
@@ -169,7 +158,7 @@ function afterRender(currentState) {
         let lName = document.getElementById("lname");
         const fNameSplit = fName.innerHTML.split("");
         const lNameSplit = lName.innerHTML.split("");
-        const hbMenu = document.getElementById("hbMenu");
+
         const slide = document.getElementById("slide");
         const buttons = document.getElementById("buttons");
         //loop through the name and change the letters

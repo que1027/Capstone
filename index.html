@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
 <body>
+    <!--hamburger menu button-->
     <div id="menu">
-        <img id="hbMenu" src="./components/views/assets/img/hbMenu.png" />
+        <button class="hamburger">
+            <div class="bar"></div>
+        </button>
+        <!--social media links-->
     <span id="socials">
         <a href="#" class="fa fa-facebook"></a>&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#" class="fa fa-linkedin"></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -21,12 +25,8 @@
     </span>
 </div>
     <main>
-         <!-- <svg id="slide" width="250" height="590">
-            <rect x="10" y="10" width="250" height="5900" fill="black">
 
-            </rect>
-        </svg> -->
-
+<!--where everything will render-->
         <div id="root"></div>
 
         <script src="index.js" type="module"></script>
