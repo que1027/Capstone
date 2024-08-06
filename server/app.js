@@ -12,7 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT || 8080;
 //Initialize the Express application
 const app = express();
-
+//connect to mongodb
 mongoose.connect(process.env.MONGODB, {
   //Configuration options to remove depreciation warnings, just include them to remove clutter
   useNewUrlParser: true,
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB, {
 
 const db = mongoose.connection;
 
-//ask about this code
+//in the event of an error we will take the error from mongoDB and we will log it
 db.on("error", console.error.bind(console, "Connection Error:"));
 db.once(
   "open",
@@ -33,8 +33,7 @@ const client = mailjet.apiConnect(
   process.env.MJ_APIKEY_PRIVATE
 );
 
-//this too
-// Logging Middleware
+// Logs info about incoming requests
 const logging = (request, response, next) => {
   console.log(
     `${request.method} ${request.url} ${new Date().toLocaleString("en-us")}`
@@ -42,6 +41,7 @@ const logging = (request, response, next) => {
   next();
 };
 //CORS Middleware
+//sets the reqired cors headers
 const cors = (request, response, next) => {
   response.setHeader(
     "Access-Control-Allow-Headers",
@@ -55,13 +55,11 @@ const cors = (request, response, next) => {
   response.setHeader("Access-Control-Allow-Credentials", true);
   next();
 };
+//uses all of the middlewares
 app.use(cors);
 app.use(express.json());
 app.use(logging);
 app.get("/status", (request, response) => {
-  //Create the headers for response by default 200
-  //create the response body
-  //End and return the response
   response.send(JSON.stringify({ massage: "Service healthy" }));
 });
 

@@ -14,6 +14,9 @@ footer{
     top:60vw;
 
 }
+.hamburger{
+    display: none;
+}
 #socials{
 display: flex;
 justify-content:space-between;
@@ -38,9 +41,7 @@ left:750px;
         .greenButton{
             background-color:green;
         }
-        #hbMenu{
-        display: none;
-        }
+
         #menu{
             display:flex;
             flex-direction: row;
@@ -245,6 +246,36 @@ z-index: 2;
         overflow-y: hidden;
         overflow-x: hidden;
     }
+    .hamburger{
+        position: relative;
+        display:block;
+        width: 50px;
+        cursor: pointer;
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+        z-index: 99;
+    }
+    .hamburger .bar, .hamburger:after, .hamburger:before{
+        content: '';
+        display:block;
+        width:100%;
+        height: 5px;
+        background-color: white;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+    .hamburger.is-active:before{
+        transform: rotate(-45deg) translate(-8px, 6px);
+
+    }
+    .hamburger.is-active:after{
+        transform: rotate(45deg) translate(-9px, -8px);
+    }
+.hamburger.is-active .bar{
+    opacity:0;
+}
     #namesAndPic{
         display:flex;
         flex-direction: column;
@@ -278,30 +309,13 @@ z-index: 2;
         height:120vw;
         width:110vw;
     }
-
-    /* button{
-        border-radius: 16px;
-        font-size: 2vw;
-    }
-    .whiteButton{
-        background-color:white;
-    }
-    .greenButton{
-        color:white;
-        background-color:green;
-    } */
     #menu{
         display: inline;
         display:flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    #hbMenu{
-        display:inline;
-        width:50px;
-        height:50px;
-        color: green;
-    }
+
 
     footer{
         position:absolute;
@@ -310,28 +324,20 @@ z-index: 2;
         top:148vw;
 
     }
-    /* #buttons{
-        display: none;
-        position: absolute;
-        flex-direction: column;
-        width:100px;
-        top:60px;
-        left:17vw;
-        justify-content: space-between;
-        z-index: 1;
-    }  */
-    #slide{
-        position:absolute;
-        /* top:-2vw;
-         */
-         left:-5vw;
-        display:none;
-        z-index: 2;
-    }
     .hidden--mobile{
-        display: none;
-        flex-direction: column;
-        z-index: 3;
+       position: fixed;
+       top:0;
+       left:100%;
+       width:100%;
+       min-height:100vh;
+       display:block;
+       z-index: 98;
+       background-color: black;
+       padding-top: 120px;
+       transition: 0.4s;
+    }
+    .hidden--mobile.is-active{
+        left:0;
     }
 }
 
