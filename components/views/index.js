@@ -5,4 +5,5 @@ export { default as myAwards } from "./myAwards";
 export { default as myProjects } from "./myProjects";
 export { default as contactMe } from "./contactMe";
 export { default as signIn } from "./signIn";
+export { default as look } from "./look";
 export { default as viewNotFound } from "./viewNotFound";

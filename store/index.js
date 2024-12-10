@@ -7,3 +7,4 @@ export { default as myAwards } from "./myAwards";
 export { default as myProjects } from "./myProjects";
 export { default as viewNotFound } from "./viewNotFound";
 export { default as signIn } from "./signIn";
+export { default as look } from "./look";

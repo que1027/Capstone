@@ -233,7 +233,25 @@ z-index: 2;
 
 }
 
+/*look*/
+/*movies*/
 
+#movie-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:30px;
+    padding-bottom: 100px;
+    }
+    .mov{
+    width:200px;
+    }
+    .mov:hover{
+        width:210px;
+        }
+    .caption{
+        color:white;
+    }
 
 
 
@@ -243,8 +261,6 @@ z-index: 2;
 @media (max-width:667px) {
     body{
         background-color: black;
-        overflow-y: hidden;
-        overflow-x: hidden;
     }
     .hamburger{
         position: relative;
