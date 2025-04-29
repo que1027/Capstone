@@ -1,0 +1,2 @@
+web app: npm run serve
+server is node server/app.js
