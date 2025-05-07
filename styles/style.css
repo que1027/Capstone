@@ -144,6 +144,9 @@ p{
         height:40vw;
         width:35vw;
     }
+    .project{
+        font-size:2vw ;
+    }
 
     /*Movement On Hover*/
     #language1:hover {

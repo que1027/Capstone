@@ -1557,13 +1557,13 @@ nbsp;
         Java
   </div>
         <hr />
-        <a href="https://github.com/que1027/Projects/tree/0bf4ca6a50c68c6d9922680d0b0928ea57216707/UnitConverter">Unit Converter</a>
+        <a class="project" href="https://github.com/que1027/Projects/tree/0bf4ca6a50c68c6d9922680d0b0928ea57216707/UnitConverter">Unit Converter</a>
         <hr />
   <div id="language3">
         Python
   </div>
         <hr />
-        <a href="https://github.com/que1027/Projects/blob/0bf4ca6a50c68c6d9922680d0b0928ea57216707/calculator.py">Calculator</a>
+        <a class="project" href="https://github.com/que1027/Projects/blob/0bf4ca6a50c68c6d9922680d0b0928ea57216707/calculator.py">Calculator</a>
         <hr />
   <div id="language4">
         C#
