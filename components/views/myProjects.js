@@ -1551,7 +1551,7 @@ nbsp;
         C++
   </div>
         <hr />
-        <a href="https://github.com/que1027/Projects/blob/main/PalendromeValidator.cpp">PalendromeValidator</a>
+        <a class="project" href="https://github.com/que1027/Projects/blob/main/PalendromeValidator.cpp">PalendromeValidator</a>
           <hr />
   <div id="language2">
         Java
